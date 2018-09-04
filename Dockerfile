@@ -8,13 +8,15 @@ RUN yum -y install rsyslog
 RUN yum -y install postfix
 RUN yum -y install openssl
 
+ENV mydomain=${mydomain} 
+ENV myhostname=${myhostname}
+
 ADD assets/openssl_generate.sh /opt/openssl_generate.sh
 RUN /bin/bash -c 'chmod +x /opt/openssl_generate.sh'
 RUN /opt/./openssl_generate.sh
 
 ADD assets/main.cf.sh /opt/main.cf.sh
 RUN /bin/bash -c 'chmod +x /opt/main.cf.sh'
-RUN /opt/./main.cf.sh
 
 ADD assets/master.cf.sh /opt/master.cf.sh
 RUN /bin/bash -c 'chmod +x /opt/master.cf.sh'
@@ -67,3 +69,10 @@ RUN systemctl enable rsyslog.service
 
 RUN yum clean all
 
+COPY docker-entrypoint.sh /usr/local/bin/
+
+RUN /bin/bash -c 'chmod +x /usr/local/bin/docker-entrypoint.sh'
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
+CMD ["sh", "-c", "/opt/init.sh"]
