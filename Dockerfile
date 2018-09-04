@@ -60,6 +60,12 @@ ADD assets/opendkim_generate.sh /opt/opendkim_generate.sh
 RUN /bin/bash -c 'chmod +x /opt/opendkim_generate.sh'
 RUN /opt/./opendkim_generate.sh
 
+ADD assets/configure.sh /opt/configure.sh
+RUN /bin/bash -c 'chmod +x /opt/configure.sh'
+ADD assets/postfix.sh /opt/postfix.sh
+RUN /bin/bash -c 'chmod +x /opt/postfix.sh'
+RUN /opt/configure.sh 
+
 RUN systemctl enable postfix.service
 RUN systemctl enable dovecot.service
 RUN systemctl enable opendkim.service

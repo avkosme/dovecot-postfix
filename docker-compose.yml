@@ -1,0 +1,10 @@
+version: '3'
+services:
+
+  mail:
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    privileged: true
+    environment:
+      - postfix_myhostname=example.org 
