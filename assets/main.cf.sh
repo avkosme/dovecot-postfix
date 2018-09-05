@@ -313,7 +313,7 @@ unknown_local_recipient_reject_code = 550
 #
 # If you're connected via UUCP, see also the default_transport parameter.
 #
-#relayhost = $mydomain
+relayhost = $relayhost
 #relayhost = [gateway.my.domain]
 #relayhost = [mailserver.isp.tld]
 #relayhost = uucphost
@@ -1422,5 +1422,8 @@ milter_protocol = 6
 milter_default_action = accept
 smtpd_milters = local:/var/spool/opendkim/opendkim.sock
 non_smtpd_milters = local:/var/spool/opendkim/opendkim.sock
+smtp_sasl_auth_enable = $smtp_sasl_auth_enable
+smtp_sasl_password_maps = $smtp_sasl_password_maps
+smtp_sasl_security_options = $smtp_sasl_security_options
 EOF
 

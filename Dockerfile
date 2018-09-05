@@ -8,9 +8,6 @@ RUN yum -y install rsyslog
 RUN yum -y install postfix
 RUN yum -y install openssl
 
-ENV mydomain=${mydomain} 
-ENV myhostname=${myhostname}
-
 ADD assets/openssl_generate.sh /opt/openssl_generate.sh
 RUN /bin/bash -c 'chmod +x /opt/openssl_generate.sh'
 RUN /opt/./openssl_generate.sh
